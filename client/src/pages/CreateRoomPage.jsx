@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import socket from "../socket/socket";
+import "../css/CreateRoomPage.css";
 
 function CreateRoomPage() {
   const [nickname, setNickname] = useState("");
@@ -11,11 +12,11 @@ function CreateRoomPage() {
   };
 
   return (
-    <div>
-      <h2>ルーム作成</h2>
-      <input placeholder="名前" onChange={(e) => setNickname(e.target.value)} />
+    <div className="CreateRoomPage">
+      <h2>☆ ルーム作成 ☆</h2>
+      <input placeholder="名前を入力" onChange={(e) => setNickname(e.target.value)} />
       <input
-        placeholder="あいことば"
+        placeholder="あいことばを入力"
         onChange={(e) => setKeyword(e.target.value)}
       />
       <button onClick={handleCreate}>作成</button>
@@ -24,4 +25,4 @@ function CreateRoomPage() {
 }
 
 export default CreateRoomPage;
-// This file is identical in both locations, so no changes are needed.
+// This file is identical in both locations, so no changes are needed.gi
