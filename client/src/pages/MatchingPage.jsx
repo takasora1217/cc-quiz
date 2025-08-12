@@ -1,25 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import socket from "../socket/socket";
 
 export default function MatchingPage() {
+  const [players, setPlayers] = useState([]);
+  const location = useLocation();
+  const myName = location.state?.nickname;
+
   useEffect(() => {
-    socket.emit("ping", "ping from client");
-    socket.on("pong", (msg) => alert(msg));
+    socket.on("updatePlayerList", setPlayers);
 
-    // gameStartAtのリスナーを関数として定義
-    const onGameStartAt = ({ startAt }) => {
-      const delay = startAt - Date.now();
-      setTimeout(() => alert("🎮 ゲームスタート！"), delay);
-    };
-    socket.on("gameStartAt", onGameStartAt);
-
-    // クリーンアップ
     return () => {
-      socket.off("pong");
-      socket.off("gameStartAt", onGameStartAt);
+      socket.off("updatePlayerList", setPlayers);
     };
   }, []);
 
-  return <div>Matching Page</div>;
+  return (
+    <div>
+      <h2>Matching Page</h2>
+      <div>自分の名前: {myName}</div>
+      <div>参加者リスト:</div>
+      <ul>
+        {players.map((p) => (
+          <li key={p.id}>
+            {p.name} {p.name === myName && "👈あなた"}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
-// こんちは ここはマッチングページです
