@@ -1,5 +1,7 @@
 import React from "react";
-export default function JoinRoomPage() {
-  return <div>Join Room Page</div>;
+
+
+function JoinRoomPage() {
+  return <div>ルーム参加ページ</div>;
 }
-// Hello World
+export default JoinRoomPage;

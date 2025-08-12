@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PlaySetupPage from "./pages/PlaySetupPage";
 import CreateRoomPage from "./pages/CreateRoomPage";
 import JoinRoomPage from "./pages/JoinRoomPage";
 import MatchingPage from "./pages/MatchingPage";
@@ -9,6 +10,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<h1>ホーム画面</h1>} />
+        <Route path="/play" element={<PlaySetupPage />} />
         <Route path="/create" element={<CreateRoomPage />} />
         <Route path="/join" element={<JoinRoomPage />} />
         <Route path="/match" element={<MatchingPage />} />
