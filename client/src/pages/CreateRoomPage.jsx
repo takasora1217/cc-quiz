@@ -13,12 +13,20 @@ function CreateRoomPage() {
 
   return (
     <div className="CreateRoomPage">
+      
       <h2>☆ ルーム作成 ☆</h2>
-      <input placeholder="名前を入力" onChange={(e) => setNickname(e.target.value)} />
+      <input
+        placeholder="名前を入力"
+        onChange={(e) => setNickname(e.target.value)}
+      />
       <input
         placeholder="あいことばを入力"
         onChange={(e) => setKeyword(e.target.value)}
       />
+      <select onChange={(e) => setMode(e.target.value)}>
+        <option>モードを選択</option>
+        <option>ファイブリーグ（３人用）</option>
+      </select>
       <button onClick={handleCreate}>作成</button>
     </div>
   );
