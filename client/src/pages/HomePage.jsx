@@ -7,9 +7,12 @@ function HomePage() {
 
   return (
     <div className="HomePage">
-      <h1>☆ ホーム画面 ☆</h1>
-      <button onClick={() => navigate("/play")}>遊ぶ</button>
-      <button onClick={() => navigate("/create")}>作る</button>
+      <h1>home</h1>
+      <img src="../img/リーーーグ.png" />
+      <div className="buttons">
+        <button onClick={() => navigate("/play")}>遊ぶ</button>
+        <button onClick={() => navigate("/create")}>作る</button>
+      </div>
     </div>
   );
 }
