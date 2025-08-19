@@ -1,0 +1,83 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.CreateQuestionPage {
+  min-height: 100vh;
+  min-width: 100vw;
+  background-image: url(img/ネプリーグ待機セット.png);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "DotGothic16", sans-serif;
+  margin-top: -2vh;
+}
+
+.CreateQuestionPage h2 {
+  margin-top: 6vh;
+  color: #ff0000;
+  font-size: 11vh;
+  margin-bottom: 7vh;
+  background-color: black;
+  width: 100vw;
+  text-align: center;
+}
+
+.CreateQuestionPage input {
+  text-align: center;
+  font-size: 3.5vh;
+  font-weight: bold;
+  margin-bottom: 5vh;
+  padding: 3vh;
+  border: 1vh solid;
+  border-radius: 1.5vh;
+  border-color: rgb(104, 108, 44);
+  box-shadow: 10px 10px 20px rgb(36, 34, 22);
+}
+
+.CreateQuestionPage select {
+  width: 500px;
+  text-align: center;
+  font-size: 3.5vh;
+  font-weight: bold;
+  margin-bottom: 5vh;
+  padding: 3vh;
+  border: 1vh solid;
+  border-radius: 1.5vh;
+  border-color: blue;
+  box-shadow: 10px 10px 20px rgb(36, 34, 22);
+}
+
+.CreateQuestionPage button {
+  color: white;
+  margin-top: 1vh;
+  border-radius: 3vh;
+  border-color: white;
+  border-width: 0.5vh;
+  font-size: 4vh;
+  font-weight: bold;
+  padding: 2.5vh 7vh 2.5vh 7vh;
+  box-shadow: 10px 10px 20px rgb(36, 34, 22);
+  background-color: blue;
+}
+
+.CreateQuestionPage button:hover {
+  background-color: rgb(255, 255, 255);
+  color: blue;
+  cursor: pointer;
+  border-color: blue;
+  border-width: 0.5vh;
+}
+
+.CreateQuestionPage h3 {
+  font-size: 6vh; /* ← 文字サイズ（大きくする） */
+  color: black; /* ← 色 */
+  margin-bottom: 2vh; /* 入力欄との間隔 */
+  text-align: center; /* 中央寄せ */
+}
