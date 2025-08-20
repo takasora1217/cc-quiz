@@ -1,3 +1,7 @@
+# 概要
+
+リアルタイムクイズゲーム。問題の答えとなる空欄を1人1文字答える。ネプリーグのファイブボンバーから着想を得ている。面白いクイズ形式で楽しめるゲームにしたいので、これ以外にもクイズ形式を増やしたいという意向。問題を遊ぶだけでなく、ユーザーが問題を作成できる。
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
