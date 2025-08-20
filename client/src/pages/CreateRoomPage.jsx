@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import socket from "../socket/socket";
 import "../css/CreateRoomPage.css";
 
@@ -6,15 +7,21 @@ function CreateRoomPage() {
   const [nickname, setNickname] = useState("");
   const [keyword, setKeyword] = useState("");
   const [mode, setMode] = useState("nep");
+  const navigate = useNavigate();
 
   const handleCreate = () => {
     socket.emit("createRoom", { nickname, keyword, mode });
+    // 作成後、MatchingPageへ遷移
+    navigate("/match", { state: { nickname, keyword } });
   };
 
   return (
     <div className="CreateRoomPage">
       <h2>☆ ルーム作成 ☆</h2>
-      <input placeholder="名前を入力" onChange={(e) => setNickname(e.target.value)} />
+      <input
+        placeholder="名前を入力"
+        onChange={(e) => setNickname(e.target.value)}
+      />
       <input
         placeholder="あいことばを入力"
         onChange={(e) => setKeyword(e.target.value)}
@@ -25,4 +32,4 @@ function CreateRoomPage() {
 }
 
 export default CreateRoomPage;
-// This file is identical in both locations, so no changes are needed.gi
+// filepath: c:\Projects\MyWebApp\cc-quiz\client\src\pages\CreateRoomPage.jsx

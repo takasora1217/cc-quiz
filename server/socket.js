@@ -35,15 +35,12 @@ module.exports = function (io) {
 // ...existing code...
 socket.on("joinRoom", ({ nickname, keyword }) => {
   const roomID = `room-${keyword}`;
-  socket.join(roomID);
-
-  // 既存ルームがあれば追加、なければ新規作成
+  // 部屋が存在しない場合は参加不可
   if (!rooms[roomID]) {
-    rooms[roomID] = { players: [], mode: "nep" };
+    socket.emit("joinError", { message: "その合言葉の部屋は存在しません。" });
+    return;
   }
+  socket.join(roomID);
   rooms[roomID].players.push({ id: socket.id, name: nickname });
-
-  // 参加者リストを全員に送信
   io.to(roomID).emit("updatePlayerList", rooms[roomID].players);
 });
-// ...existing code...
