@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 const rooms = {};
 
 module.exports = function (io) {
@@ -30,17 +30,22 @@ module.exports = function (io) {
       const startTime = Date.now() + 5000; // 今から5秒後
       io.to(roomID).emit("gameStartAt", { startAt: startTime }); // ルーム内のクライアントに同期通知
     });
+
+    // ここにイベントをまとめて書く
+    socket.on("joinRoom", ({ nickname, keyword }) => {
+      const roomID = `room-${keyword}`;
+      // 部屋が存在しない場合は参加不可
+      if (!rooms[roomID]) {
+        socket.emit("joinError", {
+          message: "その合言葉の部屋は存在しません。",
+        });
+        return;
+      }
+      socket.join(roomID);
+      rooms[roomID].players.push({ id: socket.id, name: nickname });
+      io.to(roomID).emit("updatePlayerList", rooms[roomID].players);
+    });
+
+    // 他のイベントもここに
   });
 };
-// ...existing code...
-socket.on("joinRoom", ({ nickname, keyword }) => {
-  const roomID = `room-${keyword}`;
-  // 部屋が存在しない場合は参加不可
-  if (!rooms[roomID]) {
-    socket.emit("joinError", { message: "その合言葉の部屋は存在しません。" });
-    return;
-  }
-  socket.join(roomID);
-  rooms[roomID].players.push({ id: socket.id, name: nickname });
-  io.to(roomID).emit("updatePlayerList", rooms[roomID].players);
-});
