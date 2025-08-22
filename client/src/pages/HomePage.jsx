@@ -8,7 +8,7 @@ function HomePage() {
   return (
     <div className="HomePage">
       <h1>home</h1>
-      <img src="../img/リーーーグ.png" />
+      <img src="/img/リーーーグ.png" />
       <div className="buttons">
         <button onClick={() => navigate("/play")}>遊ぶ</button>
         <button onClick={() => navigate("/create")}>作る</button>
