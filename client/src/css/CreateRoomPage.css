@@ -8,7 +8,7 @@ body, html {
 .CreateRoomPage {
     min-height: 100vh;
     min-width: 100vw;
-    background-image: url(img/ネプリーグ待機セット.png);
+    background-image: url(/img/ネプリーグ待機セット.png);
     background-size: cover;
     background-position: center;
     display: flex;
