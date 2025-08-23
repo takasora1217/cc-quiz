@@ -7,15 +7,22 @@ html {
 }
 
 .HomePage {
+  min-height: 100vh;
+  min-width: 100vw;
+  background-image: url(/img/ネプリーグ待機セット.png);
+  background-size: cover;
+  background-position: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "DotGothic16", sans-serif;
   margin-top: -2vh;
 }
 .HomePage img {
   height: auto;
   max-width: 100%;
-  margin-bottom: 20px;}
+  margin-bottom: 20px;
+}
 
 .HomePage h1 {
   color: black;
