@@ -7,15 +7,22 @@ html {
 }
 
 .HomePage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: -2vh;
+    min-height: 100vh;
+    min-width: 100vw;
+    background-image: url(/img/メカニック.png);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "DotGothic16", sans-serif;
+    overflow: hidden;
 }
 .HomePage img {
-  height: auto;
-  max-width: 100%;
-  margin-bottom: 20px;}
+  height: 30vh;
+  margin-bottom: 5vh;
+  margin-top: 18vh;
+}
 
 .HomePage h1 {
   color: black;
@@ -39,7 +46,7 @@ html {
   border-width: 0.5vh;
   font-size: 8vh;
   font-weight: bold;
-  padding: 8vh 10vh 8vh 10vh;
+  padding: 5vh 10vh 5vh 10vh;
   box-shadow: 10px 10px 20px rgb(36, 34, 22);
   background-color: blue;
 }
