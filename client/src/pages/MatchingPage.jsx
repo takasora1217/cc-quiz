@@ -6,15 +6,20 @@ export default function MatchingPage() {
   const [players, setPlayers] = useState([]);
   const location = useLocation();
   const myName = location.state?.nickname;
-  const keyword = location.state?.keyword; // 合言葉を取得
+  const keyword = location.state?.keyword;
 
   useEffect(() => {
+    // 参加者側でページ遷移時にjoinRoomをemit
+    if (myName && keyword) {
+      socket.emit("joinRoom", { nickname: myName, keyword });
+    }
+
     socket.on("updatePlayerList", setPlayers);
 
     return () => {
       socket.off("updatePlayerList", setPlayers);
     };
-  }, []);
+  }, [myName, keyword]);
 
   return (
     <div>
