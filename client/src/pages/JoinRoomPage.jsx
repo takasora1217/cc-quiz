@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import socket from "../socket/socket";
 import "../css/JoinRoomPage.css";
@@ -6,12 +6,30 @@ import "../css/JoinRoomPage.css";
 function JoinRoomPage() {
   const [nickname, setNickname] = useState("");
   const [keyword, setKeyword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // サーバーからjoinErrorを受け取ったらエラー表示
+    socket.on("joinError", (data) => {
+      setError(data.message);
+    });
+    return () => {
+      socket.off("joinError");
+    };
+  }, []);
+
   const handleJoin = () => {
+    setError(""); // 前回のエラーをクリア
     socket.emit("joinRoom", { nickname, keyword });
-    // 参加完了後にMatchingPageへ遷移
-    navigate("/match", { state: { nickname, keyword } });
+
+    // サーバーからjoinErrorが来なければ、updatePlayerListが来るはず
+    // ここでは遷移せず、updatePlayerListをMatchingPageで受け取る
+    socket.once("updatePlayerList", () => {
+      navigate("/match", { state: { nickname, keyword } });
+      setKeyword("");
+      setNickname("");
+    });
   };
 
   return (
@@ -28,6 +46,7 @@ function JoinRoomPage() {
         onChange={(e) => setKeyword(e.target.value)}
       />
       <button onClick={handleJoin}>参加</button>
+      {error && <div style={{ color: "red" }}>{error}</div>}
     </div>
   );
 }

@@ -1,49 +1,60 @@
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 const rooms = {};
 
 module.exports = function (io) {
   io.on("connection", (socket) => {
     console.log("🟢 接続:", socket.id);
 
-    // 通信確認用のテストイベント
-    socket.on("ping", (msg) => {
-      console.log("📥 ping受信:", msg);
-      socket.emit("pong", "pong from server");
-    });
-
     socket.on("createRoom", ({ nickname, keyword, mode }) => {
-      console.log("📥 createRoom 受信:", { nickname, keyword, mode });
-
       const roomID = `room-${keyword}`;
       socket.join(roomID);
 
-      // プレイヤー登録（必要に応じて rooms に保存）
+      // プレイヤー登録（新規作成時は1人だけ）
       rooms[roomID] = {
         mode,
         players: [{ id: socket.id, name: nickname }],
       };
 
-      // マッチング情報をクライアントへ送信
       io.to(roomID).emit("updatePlayerList", rooms[roomID].players);
     });
-    socket.on("startGame", ({ roomID }) => {
-      const startTime = Date.now() + 5000; // 今から5秒後
-      io.to(roomID).emit("gameStartAt", { startAt: startTime }); // ルーム内のクライアントに同期通知
+
+    socket.on("joinRoom", ({ nickname, keyword }) => {
+      const roomID = `room-${keyword}`;
+      if (!rooms[roomID]) {
+        socket.emit("joinError", {
+          message: "その合言葉の部屋は存在しません。",
+        });
+        return;
+      }
+      socket.join(roomID);
+
+      // すでに同じIDのプレイヤーがいない場合のみ追加（スプレッド構文で新配列に）
+      if (!rooms[roomID].players.some((p) => p.id === socket.id)) {
+        rooms[roomID].players = [
+          ...rooms[roomID].players,
+          { id: socket.id, name: nickname },
+        ];
+      }
+      io.to(roomID).emit("updatePlayerList", rooms[roomID].players);
+    });
+
+    socket.on("disconnect", () => {
+      for (const roomID in rooms) {
+        const idx = rooms[roomID].players.findIndex((p) => p.id === socket.id);
+        if (idx !== -1) {
+          if (idx === 0) {
+            io.to(roomID).emit("roomClosed");
+            delete rooms[roomID];
+          } else {
+            rooms[roomID].players = [
+              ...rooms[roomID].players.slice(0, idx),
+              ...rooms[roomID].players.slice(idx + 1),
+            ];
+            io.to(roomID).emit("updatePlayerList", rooms[roomID].players);
+          }
+          break;
+        }
+      }
     });
   });
 };
-// ...existing code...
-socket.on("joinRoom", ({ nickname, keyword }) => {
-  const roomID = `room-${keyword}`;
-  socket.join(roomID);
-
-  // 既存ルームがあれば追加、なければ新規作成
-  if (!rooms[roomID]) {
-    rooms[roomID] = { players: [], mode: "nep" };
-  }
-  rooms[roomID].players.push({ id: socket.id, name: nickname });
-
-  // 参加者リストを全員に送信
-  io.to(roomID).emit("updatePlayerList", rooms[roomID].players);
-});
-// ...existing code...

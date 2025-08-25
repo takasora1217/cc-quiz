@@ -6,16 +6,19 @@ import "../css/CreateRoomPage.css";
 function CreateRoomPage() {
   const [nickname, setNickname] = useState("");
   const [keyword, setKeyword] = useState("");
-  const [mode, setMode] = useState("");
+
+  const [mode, setMode] = useState("nep");
+
+
+
   const navigate = useNavigate();
 
   const handleCreate = () => {
     socket.emit("createRoom", { nickname, keyword, mode });
 
-    // ファイブリーグモードのときだけ CreateQuestionPage へ遷移
-    if (mode === "ファイブリーグ（３人用）") {
-      navigate("/create-question");
-    }
+    // 作成後、MatchingPageへ遷移
+    navigate("/match", { state: { nickname, keyword } });
+
   };
 
   return (
@@ -45,3 +48,5 @@ function CreateRoomPage() {
 }
 
 export default CreateRoomPage;
+
+// filepath: c:\Projects\MyWebApp\cc-quiz\client\src\pages\CreateRoomPage.jsx
