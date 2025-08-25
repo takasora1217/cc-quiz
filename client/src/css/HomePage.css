@@ -19,17 +19,18 @@ html {
     overflow: hidden;
 }
 .HomePage img {
-  height: 30vh;
-  margin-bottom: 5vh;
-  margin-top: 18vh;
+  height: 32vh;
+  margin-bottom: 3vh;
+  margin-top: 14vh;
 }
 
 .HomePage h1 {
-  color: black;
+  text-align: center;
+  align-items: center;
+  color: rgb(55, 71, 69);
   font-size: 4vh;
-  margin-bottom: 9vh;
+  margin-bottom: 1vh;
   width: 100vw;
-  padding-left: 3vw;
 }
 .buttons {
   display: flex;
@@ -44,9 +45,9 @@ html {
   border-radius: 3vh;
   border-color: white;
   border-width: 0.5vh;
-  font-size: 8vh;
+  font-size: 7vh;
   font-weight: bold;
-  padding: 5vh 10vh 5vh 10vh;
+  padding: 4vh 10vh 4vh 10vh;
   box-shadow: 10px 10px 20px rgb(36, 34, 22);
   background-color: blue;
 }
