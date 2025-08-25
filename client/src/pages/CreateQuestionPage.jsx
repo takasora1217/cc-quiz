@@ -18,7 +18,8 @@ function CreateQuestionPage() {
     console.log("問題:", question);
     console.log("答え:", answer.join(""));
     // socket.emit("createQuestion", { question, answer: answer.join("") });
-    navigate("/quiz"); // 投稿後にクイズ画面へ遷移
+
+    navigate("/"); // 投稿後にホーム画面へ遷移
   };
 
   return (
