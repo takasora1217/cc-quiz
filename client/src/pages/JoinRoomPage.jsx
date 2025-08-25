@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import socket from "../socket/socket";
+import "../css/JoinRoomPage.css";
 
 function JoinRoomPage() {
   const [nickname, setNickname] = useState("");
@@ -32,7 +33,7 @@ function JoinRoomPage() {
   };
 
   return (
-    <div>
+    <div className="JoinRoomPage">
       <h2>☆ ルーム参加 ☆</h2>
       <input
         placeholder="名前を入力"

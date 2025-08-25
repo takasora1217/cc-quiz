@@ -8,7 +8,7 @@ body, html {
 .CreateRoomPage {
     min-height: 100vh;
     min-width: 100vw;
-    background-image: url(img/ネプリーグ待機セット.png);
+    background-image: url(/img/ネプリーグ待機セット.png);
     background-size: cover;
     background-position: center;
     display: flex;
@@ -19,29 +19,41 @@ body, html {
 }
 
 .CreateRoomPage h2 {
+    margin-top: 6vh;
     color: #ff0000;
     font-size: 11vh;
-    margin-bottom: 12vh;
+    margin-bottom: 7vh;
     background-color: black;
     width: 100vw;
     text-align: center;
     
 }
-
 .CreateRoomPage input {
 text-align: center;
-font-size: 4vh;
+font-size: 3.5vh;
 font-weight: bold;
-margin-bottom: 6vh;
+margin-bottom: 5vh;
 padding: 3vh;
 border: 1vh solid;
 border-radius: 1.5vh;
 border-color: rgb(104, 108, 44);
 box-shadow: 10px 10px 20px rgb(36, 34, 22) ;
 }
+.CreateRoomPage select {
+width: 500px;
+text-align: center;
+font-size: 3.5vh;
+font-weight: bold;
+margin-bottom: 5vh;
+padding: 3vh;
+border: 1vh solid;
+border-radius: 1.5vh;
+border-color: blue;
+box-shadow: 10px 10px 20px rgb(36, 34, 22) ;
+}
 .CreateRoomPage button {
     color: white;
-    margin-top: 3vh;
+    margin-top: 1vh;
     border-radius: 3vh;
     border-color: white;
     border-width: 0.5vh;
