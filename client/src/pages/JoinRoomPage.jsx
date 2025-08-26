@@ -46,7 +46,17 @@ function JoinRoomPage() {
         onChange={(e) => setKeyword(e.target.value)}
       />
       <button onClick={handleJoin}>参加</button>
-      {error && <div style={{ color: "red" }}>{error}</div>}
+      {error && (
+        <div
+          style={{
+            color: "#000000ff",
+            fontSize: "3vh",
+            marginTop: "2vh",
+          }}
+        >
+          {error}
+        </div>
+      )}
     </div>
   );
 }
