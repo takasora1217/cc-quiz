@@ -15,7 +15,6 @@ body, html {
     flex-direction: column;
     align-items: center;
     font-family: "DotGothic16", sans-serif;
-    margin-top: -2vh;
 }
 
 .JoinRoomPage h2 {
