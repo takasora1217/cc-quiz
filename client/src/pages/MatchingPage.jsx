@@ -26,15 +26,15 @@ export default function MatchingPage() {
     <div className="MatchingPage">
       <h2>待機中...</h2>
       <div className="info-box">
-        <div>自分の名前: {myName}</div>
-        <div>あいことば: {keyword}</div>
+        <div>あなたの名前: {myName}</div>
+        <div>　あいことば: {keyword}</div>
       </div>
       <div className="player-list">
         <div>参加者リスト:</div>
         <ul>
           {players.map((p) => (
-            <li key={p.id}>
-              {p.name} {p.name === myName && "👈あなた"}
+            <li key={p.id} style={{ color: "blue" }}>
+              {p.name} {p.name === myName && <span style={{ color: "black" }}> ←あなた</span>}
             </li>
           ))}
         </ul>
