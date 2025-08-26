@@ -11,7 +11,7 @@ function HomePage() {
       <img src="/img/リーーーグ.png" />
       <div className="buttons">
         <button onClick={() => navigate("/play")}>遊ぶ</button>
-        <button onClick={() => navigate("/create")}>作る</button>
+        <button onClick={() => navigate("/create-question")}>作る</button>
       </div>
     </div>
   );
