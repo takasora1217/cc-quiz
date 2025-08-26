@@ -24,11 +24,11 @@ function CreateQuestionPage() {
 
   return (
     <div className="CreateQuestionPage">
-      <h2>☆ 問題作成 ☆</h2>
+      <h2>☆ つくる ☆</h2>
 
       {/* 問題入力 */}
-      <input
-        placeholder="問題を入力"
+      <input className="question-input"
+        placeholder="問題文を入力"
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
       />
@@ -41,7 +41,7 @@ function CreateQuestionPage() {
             key={index}
             type="text"
             maxLength="1"
-            placeholder={`答え${index + 1}文字目`} // 入力欄内に表示
+            placeholder={index + 1} // 入力欄内に表示
             value={char}
             onChange={(e) => handleAnswerChange(index, e.target.value)}
           />
