@@ -27,7 +27,8 @@ function CreateQuestionPage() {
       <h2>☆ つくる ☆</h2>
 
       {/* 問題入力 */}
-      <input className="question-input"
+      <input
+        className="question-input"
         placeholder="問題文を入力"
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
