@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase";
 import "../css/CreateQuestionPage.css";
 
 function CreateQuestionPage() {
@@ -14,12 +16,34 @@ function CreateQuestionPage() {
     setAnswer(newAnswer);
   };
 
-  const handleSubmit = () => {
-    console.log("問題:", question);
-    console.log("答え:", answer.join(""));
-    // socket.emit("createQuestion", { question, answer: answer.join("") });
+  const handleSubmit = async () => {
+    // バリデーション機能を追加
+    if (!question.trim()) {
+      alert("問題文を入力してください");
+      return;
+    }
 
-    navigate("/"); // 投稿後にホーム画面へ遷移
+    if (answer.some((char) => !char.trim())) {
+      alert("答えを全て入力してください（3文字）");
+      return;
+    }
+
+     // Firebase保存処理の実装（try-catch含む）
+    try {
+      await addDoc(collection(db, "questions"), {
+        question: question.trim(),
+        answer: answer.join(""),
+        createdAt: new Date(),
+      });
+
+      // 保存成功時のフィードバック表示
+      alert("問題が正常に保存されました！");
+      console.log("問題が保存されました:", question);
+      navigate("/"); // 投稿後にホーム画面へ遷移
+    } catch (error) {
+      console.error("保存エラー:", error);
+      alert("保存に失敗しました。もう一度お試しください。");
+    }
   };
 
   return (
