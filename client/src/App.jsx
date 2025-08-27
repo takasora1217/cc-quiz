@@ -6,6 +6,7 @@ import JoinRoomPage from "./pages/JoinRoomPage";
 import MatchingPage from "./pages/MatchingPage";
 import QuizPage from "./pages/QuizPage";
 import CreateQuestionPage from "./pages/CreateQuestionPage";
+import ModeSelection from "./pages/ModeSelection";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/match" element={<MatchingPage />} />
         <Route path="/quiz" element={<QuizPage />} />
         <Route path="/create-question" element={<CreateQuestionPage />} />
+        <Route path="/mode" element={<ModeSelection />} />
       </Routes>
     </BrowserRouter>
   );
