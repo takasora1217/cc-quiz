@@ -13,7 +13,6 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url("/img/ネプリーグ待機セット.png");
 }
 
 .CreateQuestionPage h2 {
@@ -35,7 +34,7 @@ html {
   padding: 3vh;
   border: 1vh solid;
   border-radius: 1.5vh;
-  border-color: rgb(0, 0, 255);
+  border-color: #0b8556;
   box-shadow: 0.5vh 1vh 2vh rgba(11, 16, 52, 0.699);
 }
 
@@ -59,7 +58,7 @@ html {
   font-size: 5vh;
   border: 1vh solid;
   border-radius: 1.5vh;
-  border-color: rgb(0, 0, 255);
+  border-color: #0b8556;
   box-shadow: 0.5vh 1vh 2vh rgba(11, 16, 52, 0.699);
   width: 12vh;
   aspect-ratio: 1 / 1;
