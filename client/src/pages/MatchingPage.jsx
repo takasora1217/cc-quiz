@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import socket from "../socket/socket";
 import "../css/MatchingPage.css";
 
 export default function MatchingPage() {
   const [players, setPlayers] = useState([]);
   const location = useLocation();
+  const navigate = useNavigate();
   const myName = location.state?.nickname;
   const keyword = location.state?.keyword;
 
@@ -21,6 +22,14 @@ export default function MatchingPage() {
       socket.off("updatePlayerList", setPlayers);
     };
   }, [myName, keyword]);
+
+  useEffect(() => {
+    // サーバーからゲーム開始イベントを受信したら全員QuizPageへ遷移
+    socket.on("gameStarted", () => {
+      navigate("/quiz", { state: { roomID: `room-${keyword}`, nickname: myName } });
+    });
+    return () => socket.off("gameStarted");
+  }, [navigate, keyword, myName]);
 
   return (
     <div className="MatchingPage">
@@ -39,6 +48,15 @@ export default function MatchingPage() {
           ))}
         </ul>
       </div>
+      {/* 3人揃ったらスタートボタン表示 */}
+      {players.length === 3 && (
+        <div style={{ textAlign: "center", marginTop: "30px" }}>
+          <button
+            style={{ fontSize: "1.3em", padding: "15px 40px", background: "#ff0", borderRadius: "20px" }}
+            onClick={() => socket.emit("startGame", { roomID: `room-${keyword}` })}
+          >ゲームスタート</button>
+        </div>
+      )}
     </div>
   );
 }

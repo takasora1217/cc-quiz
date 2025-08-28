@@ -1,0 +1,132 @@
+.quiz-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff; 
+}
+
+.stage-display {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.stage-display h1 {
+  font-size: 3rem;
+  color: #333;
+  margin: 0;
+}
+
+.player-display {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  max-width: 600px;
+  margin-top: 2rem;
+}
+
+.player-left,
+.player-center,
+.player-right {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 1rem;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  min-width: 120px;
+  text-align: center;
+  color: #e53935;
+}
+
+.question-display {
+  text-align: center;
+  margin: 2rem 0;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.question-display h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.question-display p {
+  font-size: 1.5rem;
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.answer-display {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.answer-display h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.player-answers {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.answer-left,
+.answer-center,
+.answer-right {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 1rem;
+  background-color: #e3f2fd;
+  border: 2px solid #2196f3;
+  border-radius: 8px;
+  min-width: 60px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-display {
+  text-align: center;
+  margin: 2rem 0;
+  padding: 2rem;
+}
+
+.correct-result,
+.incorrect-result {
+  margin-bottom: 2rem;
+}
+
+.result-icon {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+.result-display h2 {
+  font-size: 2.5rem;
+  margin: 1rem 0;
+}
+
+.correct-result h2 {
+  color: #4caf50;
+}
+
+.incorrect-result h2 {
+  color: #f44336;
+}
+
+.result-display p {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  color: #666;
+}
