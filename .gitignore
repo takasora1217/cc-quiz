@@ -1,3 +1,5 @@
+# Firebaseサービスアカウントキーを除外
+server/serviceAccountKey.json
 # Logs
 logs
 *.log

@@ -26,7 +26,9 @@ export default function MatchingPage() {
   useEffect(() => {
     // サーバーからゲーム開始イベントを受信したら全員QuizPageへ遷移
     socket.on("gameStarted", () => {
-      navigate("/quiz", { state: { roomID: `room-${keyword}`, nickname: myName } });
+      navigate("/quiz", {
+        state: { roomID: `room-${keyword}`, nickname: myName },
+      });
     });
     return () => socket.off("gameStarted");
   }, [navigate, keyword, myName]);
@@ -43,7 +45,10 @@ export default function MatchingPage() {
         <ul>
           {players.map((p) => (
             <li key={p.id} style={{ color: "blue" }}>
-              {p.name} {p.name === myName && <span style={{ color: "black" }}> ←あなた</span>}
+              {p.name}{" "}
+              {p.name === myName && (
+                <span style={{ color: "black" }}> ←あなた</span>
+              )}
             </li>
           ))}
         </ul>
@@ -52,9 +57,18 @@ export default function MatchingPage() {
       {players.length === 3 && (
         <div style={{ textAlign: "center", marginTop: "30px" }}>
           <button
-            style={{ fontSize: "1.3em", padding: "15px 40px", background: "#ff0", borderRadius: "20px" }}
-            onClick={() => socket.emit("startGame", { roomID: `room-${keyword}` })}
-          >ゲームスタート</button>
+            style={{
+              fontSize: "1.3em",
+              padding: "15px 40px",
+              background: "#ff0",
+              borderRadius: "20px",
+            }}
+            onClick={() =>
+              socket.emit("startGame", { roomID: `room-${keyword}` })
+            }
+          >
+            ゲームスタート
+          </button>
         </div>
       )}
     </div>

@@ -23,7 +23,7 @@ module.exports = function (io, roomsModule, admin) {
       io.to(roomID).emit("updatePlayerList", rooms[roomID].players);
     });
 
-  socket.on("joinRoom", ({ nickname, keyword }) => {
+    socket.on("joinRoom", ({ nickname, keyword }) => {
       const roomID = `room-${keyword}`;
       if (!rooms[roomID]) {
         socket.emit("joinError", {
@@ -43,7 +43,7 @@ module.exports = function (io, roomsModule, admin) {
       io.to(roomID).emit("updatePlayerList", rooms[roomID].players);
     });
 
-  socket.on("disconnect", () => {
+    socket.on("disconnect", () => {
       for (const roomID in rooms) {
         const idx = rooms[roomID].players.findIndex((p) => p.id === socket.id);
         if (idx !== -1) {
@@ -110,27 +110,38 @@ module.exports = function (io, roomsModule, admin) {
       if (rooms[roomID].answers.length === 3) {
         io.to(roomID).emit("allAnswers", rooms[roomID].answers);
         // 3人分の回答を左から順に合体
-        const combined = rooms[roomID].answers.map(a => a.join("")).join("");
+        const combined = rooms[roomID].answers.map((a) => a.join("")).join("");
         let correct = false;
-        if (rooms[roomID].currentQuestion && rooms[roomID].currentQuestion.answer) {
+        if (
+          rooms[roomID].currentQuestion &&
+          rooms[roomID].currentQuestion.answer
+        ) {
           correct = combined === rooms[roomID].currentQuestion.answer;
         }
         // カウント更新
         if (correct) {
           rooms[roomID].correctCount = (rooms[roomID].correctCount || 0) + 1;
         } else {
-          rooms[roomID].incorrectCount = (rooms[roomID].incorrectCount || 0) + 1;
+          rooms[roomID].incorrectCount =
+            (rooms[roomID].incorrectCount || 0) + 1;
         }
         io.to(roomID).emit("judgeResult", { correct });
 
         // ゲーム終了判定
-        if (rooms[roomID].correctCount >= 5 || rooms[roomID].incorrectCount >= 2) {
+        if (
+          rooms[roomID].correctCount >= 5 ||
+          rooms[roomID].incorrectCount >= 2
+        ) {
           // ゲーム終了（部屋削除）
-          setTimeout(() => { delete rooms[roomID]; }, 5000);
+          setTimeout(() => {
+            delete rooms[roomID];
+          }, 5000);
         } else {
           // 次ステージ準備
           rooms[roomID].usedQuestions.push(rooms[roomID].currentQuestion.id);
-          const unused = rooms[roomID].questions.filter(q => !rooms[roomID].usedQuestions.includes(q.id));
+          const unused = rooms[roomID].questions.filter(
+            (q) => !rooms[roomID].usedQuestions.includes(q.id)
+          );
           if (unused.length > 0) {
             const randIdx = Math.floor(Math.random() * unused.length);
             rooms[roomID].currentQuestion = unused[randIdx];

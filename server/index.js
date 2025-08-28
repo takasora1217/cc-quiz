@@ -6,7 +6,7 @@ const cors = require("cors");
 const { Server } = require("socket.io");
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(serviceAccount),
 });
 
 const app = express();
