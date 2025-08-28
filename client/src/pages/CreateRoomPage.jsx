@@ -6,19 +6,21 @@ import "../css/CreateRoomPage.css";
 function CreateRoomPage() {
   const [nickname, setNickname] = useState("");
   const [keyword, setKeyword] = useState("");
-
   const [mode, setMode] = useState("nep");
-
-
 
   const navigate = useNavigate();
 
   const handleCreate = () => {
+    // ★ バリデーション：あいことば必須
+    if (!keyword.trim()) {
+      alert("あいことばを入力してください！");
+      return;
+    }
+
     socket.emit("createRoom", { nickname, keyword, mode });
 
     // 作成後、MatchingPageへ遷移
     navigate("/match", { state: { nickname, keyword } });
-
   };
 
   return (
@@ -27,15 +29,17 @@ function CreateRoomPage() {
 
       <input
         placeholder="名前を入力"
+        value={nickname}
         onChange={(e) => setNickname(e.target.value)}
       />
 
       <input
         placeholder="あいことばを入力"
+        value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
       />
 
-      <select onChange={(e) => setMode(e.target.value)}>
+      <select value={mode} onChange={(e) => setMode(e.target.value)}>
         <option value="">モードを選択</option>
         <option value="ファイブリーグ（３人用）">
           ファイブリーグ（３人用）
@@ -48,5 +52,3 @@ function CreateRoomPage() {
 }
 
 export default CreateRoomPage;
-
-// filepath: c:\Projects\MyWebApp\cc-quiz\client\src\pages\CreateRoomPage.jsx

@@ -20,11 +20,15 @@ function JoinRoomPage() {
   }, []);
 
   const handleJoin = () => {
-    setError(""); // 前回のエラーをクリア
+    // ★ バリデーション：あいことば必須
+    if (!keyword.trim()) {
+      alert("あいことばを入力してください！");
+      return;
+    }
+
     socket.emit("joinRoom", { nickname, keyword });
 
     // サーバーからjoinErrorが来なければ、updatePlayerListが来るはず
-    // ここでは遷移せず、updatePlayerListをMatchingPageで受け取る
     socket.once("updatePlayerList", () => {
       navigate("/match", { state: { nickname, keyword } });
       setKeyword("");
