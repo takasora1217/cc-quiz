@@ -26,16 +26,40 @@ module.exports = function (io) {
         });
         return;
       }
+      // 4人以上なら入室拒否（players追加前に判定）
+      if (rooms[roomID].players.length >= 4) {
+        socket.emit("joinError", {
+          message: "この部屋は満員です。",
+        });
+        return;
+      }
       socket.join(roomID);
 
-      // すでに同じIDのプレイヤーがいない場合のみ追加（スプレッド構文で新配列に）
+      // ここで追加
       if (!rooms[roomID].players.some((p) => p.id === socket.id)) {
         rooms[roomID].players = [
           ...rooms[roomID].players,
           { id: socket.id, name: nickname },
         ];
       }
+
+      // 念のため3人までに制限
+      rooms[roomID].players = rooms[roomID].players.slice(0,3);
+
       io.to(roomID).emit("updatePlayerList", rooms[roomID].players);
+    });
+
+    socket.on("startQuiz", ({ keyword, mode }) => {
+      const roomID = `room-${keyword}`;
+      if (!rooms[roomID]) return;
+      // ルームのモードを更新
+      rooms[roomID].mode = mode;
+      // ルームの全員に通知
+      io.to(roomID).emit("startQuiz", {
+        keyword,
+        mode,
+        players: rooms[roomID].players,
+      });
     });
 
     socket.on("disconnect", () => {
