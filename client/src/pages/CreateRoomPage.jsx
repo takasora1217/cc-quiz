@@ -7,18 +7,12 @@ function CreateRoomPage() {
   const [nickname, setNickname] = useState("");
   const [keyword, setKeyword] = useState("");
 
-  const [mode, setMode] = useState("nep");
-
-
-
   const navigate = useNavigate();
 
   const handleCreate = () => {
-    socket.emit("createRoom", { nickname, keyword, mode });
-
-    // 作成後、MatchingPageへ遷移
-    navigate("/match", { state: { nickname, keyword } });
-
+    socket.emit("createRoom", { nickname, keyword });
+    // 作成後、MatchingPageへ遷移（フラグ付き）
+    navigate("/match", { state: { nickname, keyword, fromCreateRoom: true } });
   };
 
   return (
@@ -34,13 +28,6 @@ function CreateRoomPage() {
         placeholder="あいことばを入力"
         onChange={(e) => setKeyword(e.target.value)}
       />
-
-      <select onChange={(e) => setMode(e.target.value)}>
-        <option value="">モードを選択</option>
-        <option value="ファイブリーグ（３人用）">
-          ファイブリーグ（３人用）
-        </option>
-      </select>
 
       <button onClick={handleCreate}>作成</button>
     </div>
