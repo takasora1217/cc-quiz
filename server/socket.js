@@ -1,7 +1,7 @@
-const { v4: uuidv4 } = require("uuid");
+import { v4 as uuidv4 } from "uuid";
 const rooms = {};
 
-module.exports = function (io) {
+export default function (io) {
   io.on("connection", (socket) => {
     console.log("🟢 接続:", socket.id);
 
@@ -44,7 +44,7 @@ module.exports = function (io) {
       }
 
       // 念のため3人までに制限
-      rooms[roomID].players = rooms[roomID].players.slice(0,3);
+      rooms[roomID].players = rooms[roomID].players.slice(0, 3);
 
       io.to(roomID).emit("updatePlayerList", rooms[roomID].players);
     });
@@ -81,4 +81,4 @@ module.exports = function (io) {
       }
     });
   });
-};
+}
