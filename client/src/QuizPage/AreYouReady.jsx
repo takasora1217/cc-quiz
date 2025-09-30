@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from "react";
+import "../QuizPage/QuizPage.css";
 
 export default function AreYouReady() {
     const [displayText, setDisplayText] = useState("");
@@ -27,8 +28,9 @@ export default function AreYouReady() {
 
     return (
         <div className="QuizPage">
-            {displayText && <h1>{displayText}</h1>}
-        </div>
+            <h1 style={{ color: "white", fontSize: "20vh", textAlign: "center" }}>{displayText}</h1>
+                
+            </div>
     );
 }
 
