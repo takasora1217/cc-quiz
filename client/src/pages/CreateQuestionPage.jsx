@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import "../css/CreateQuestionPage.css";
+import { AiCheck } from "./AiCheck";
 
 function CreateQuestionPage() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState(["", "", ""]); // 3文字分の配列
+  const [aiResult, setAiResult] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleAnswerChange = (index, value) => {
@@ -16,6 +19,29 @@ function CreateQuestionPage() {
     setAnswer(newAnswer);
   };
 
+  const handleAiCheck = async () => {
+    // バリデーション機能を追加
+    if (!question.trim()) {
+      alert("問題文を入力してください");
+      return;
+    }
+
+    if (answer.some((char) => !char.trim())) {
+      alert("答えを全て入力してください（3文字）");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const result = await AiCheck({ question, answer: answer.join("") });
+      setAiResult(result);
+    } catch (error) {
+      setAiResult("AIチェックでエラーが発生しました");
+    }
+    setLoading(false);
+  };
+
+  // Firebase保存処理の実装（try-catch含む）
   const handleSubmit = async () => {
     // バリデーション機能を追加
     if (!question.trim()) {
@@ -28,7 +54,6 @@ function CreateQuestionPage() {
       return;
     }
 
-     // Firebase保存処理の実装（try-catch含む）
     try {
       await addDoc(collection(db, "questions"), {
         question: question.trim(),
@@ -51,6 +76,7 @@ function CreateQuestionPage() {
       <h2>☆ つくる ☆</h2>
 
       {/* 問題入力 */}
+      <h3>問題文</h3>
       <input
         className="question-input"
         placeholder="問題文を入力"
@@ -59,7 +85,7 @@ function CreateQuestionPage() {
       />
 
       {/* 答え入力 */}
-      <h3>答え</h3>
+      <h4>答え</h4>
       <div className="answer-boxes">
         {answer.map((char, index) => (
           <input
@@ -73,7 +99,13 @@ function CreateQuestionPage() {
         ))}
       </div>
 
-      <button onClick={handleSubmit}>投稿</button>
+      <button className="button1" onClick={handleAiCheck} disabled={loading}>
+        {loading ? "チェック中..." : "AIチェック"}
+      </button>
+
+      {/* AIの結果を表示 */}
+      <p>AIチェック結果：{aiResult}</p>
+      <button className="button2" onClick={handleSubmit}>投稿</button>
     </div>
   );
 }
