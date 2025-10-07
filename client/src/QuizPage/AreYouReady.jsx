@@ -27,10 +27,10 @@ export default function AreYouReady() {
     }, []);
 
     return (
-        <div className="QuizPage">
-            <h1 style={{ color: "white", fontSize: "20vh", textAlign: "center" }}>{displayText}</h1>
+        <div>
+            <h1 style={{ color: "black", fontSize: "20vh", textAlign: "center" }}>{displayText}</h1>
                 
-            </div>
+        </div>
     );
 }
 
