@@ -56,14 +56,14 @@ html {
   display: flex;
   float: left;
   gap: 6vw;
-  margin-left: 15vw;
+  margin-left: 16vw;
 }
 .panels h3{
-  margin-top: 12vh;
+  margin-top: 12.5vh;
   font-size: 10vh;
   z-index: 2;
   background-color: rgb(0, 0, 236);
-  padding: 5vh 7vw 5vh 7vw;
+  padding: 5vh 6.75vw 5vh 6.75vw;
   color: white;
 
 }
