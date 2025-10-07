@@ -4,11 +4,66 @@ html {
   padding: 0;
   height: 100%;
   width: 100%;
-  background-color: rgb(113, 113, 113);
+  overflow: hidden;
+}
+
+.QuizPage {
+    min-height: 100vh;
+    min-width: 100vw;
+    background-image: url(/img/メカニック.png);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
 }
 
 .h1{
-  color: white;
+  color: black;
   font-size: 30vh;
   text-align: center;
+}
+
+.QuizBox{
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 35vh;
+  position: fixed;
+  background-color: transparent;
+  z-index: 0;
+}
+
+.quizboxs{
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  margin-left: -5vw;
+  grid-area: 1/1;
+  z-index: 3;
+}
+.quizboxs img{
+  width: 20vw;
+  margin-left: 5vw;
+  z-index: 4;
+}
+
+.panels{
+  background-color: transparent;
+  z-index: 1;
+  margin-top: -45vh;
+  display: flex;
+  float: left;
+  gap: 6vw;
+  margin-left: 15vw;
+}
+.panels h3{
+  margin-top: 12vh;
+  font-size: 10vh;
+  z-index: 2;
+  background-color: rgb(0, 0, 236);
+  padding: 5vh 7vw 5vh 7vw;
+  color: white;
+
 }
