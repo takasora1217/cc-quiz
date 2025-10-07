@@ -8,7 +8,7 @@ export default function QuizText() {
         setDisplayText("");
 
         const timer3 = setTimeout(() => {
-            setDisplayText("サンプルテキスト");
+            setDisplayText("問題文");
         }, 4000);
 
         return () => {
