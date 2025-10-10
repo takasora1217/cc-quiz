@@ -19,51 +19,78 @@ html {
     overflow: hidden;
 }
 
+/*Are you ready?↓*/
 .h1{
   color: black;
   font-size: 30vh;
   text-align: center;
 }
-
+/*名前・解答欄・解答画面*/
 .QuizBox{
   position: fixed;
-  bottom: 0;
+  bottom: 1vh;
   width: 100vw;
-  height: 35vh;
-  position: fixed;
-  background-color: transparent;
+  height: 40vh;
   z-index: 0;
+  background-color: transparent;
 }
-
-.quizboxs{
+.QuizBox2{
   background-color: transparent;
   display: flex;
   justify-content: center;
-  margin-left: -5vw;
-  grid-area: 1/1;
+  gap: 4.5vw;
+  z-index: 1;
+}
+.QuizBox3{
+  flex-direction: column;
+  background-color: transparent;
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+.players{
+  position: absolute;
+  color: rgb(0, 0, 0);
+  font-size: 3.5vh;
+  text-align: center;
   z-index: 3;
 }
-.quizboxs img{
-  width: 20vw;
-  margin-left: 5vw;
-  z-index: 4;
+.quizbox{
+  margin-top: 9vh;
+  width: 37vh;
+  text-align: center;
+  z-index: 5;
 }
-
-.panels{
-  background-color: transparent;
-  z-index: 1;
-  margin-top: -45vh;
-  display: flex;
-  float: left;
-  gap: 6vw;
-  margin-left: 16vw;
-}
-.panels h3{
-  margin-top: 12.5vh;
-  font-size: 10vh;
-  z-index: 2;
-  background-color: rgb(0, 0, 236);
-  padding: 5vh 6.75vw 5vh 6.75vw;
+.answers{
+  min-width: 10vw;
+  position: absolute;
   color: white;
+  font-size: 10vh;
+  text-align: center;
+  background-color: rgb(0, 0, 0);
+  padding: 4vh 4vw 4vh 4vw;
+  z-index: 4;
+  margin-top: 11.5vh;
+}
 
+/*問題文*/
+.h2{
+  color: black;
+  font-size: 10vh;
+  text-align: center;
+  margin-top: 2vh;
+}
+.AnswerButton1{
+  color:white;
+  bottom: 20vh;
+  padding: 3vh 3vw 3vh 3vw;
+  font-size: 5vh;
+  background-color: rgb(0, 0, 236);
+  border: none;
+  border-radius: 5vh;
+  text-align: center;
+}
+.AnswerButton1:hover{
+  background-color: rgb(0, 0, 150);
 }

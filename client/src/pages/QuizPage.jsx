@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import "../QuizPage/QuizPage.css";
 import AreYouReady from "../QuizPage/AreYouReady";
-import QuizText from "../QuizPage/QuizText";
+import QuizDisplay from "../QuizPage/QuizDisplay";
 import QuizBox from "../QuizPage/QuizBox";
 
 
@@ -14,7 +14,7 @@ export default function QuizPage() {
     <div className="QuizPage">
       <QuizBox />
       <AreYouReady />
-      <QuizText />
+      <QuizDisplay />
     </div>
   );
 }
