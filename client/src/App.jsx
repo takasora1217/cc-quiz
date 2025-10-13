@@ -7,6 +7,7 @@ import MatchingPage from "./pages/MatchingPage";
 import QuizPage from "./pages/QuizPage";
 import CreateQuestionPage from "./pages/CreateQuestionPage";
 import ModeSelection from "./pages/ModeSelection";
+import MinecartAdventure from "./pages/MinecartAdventure";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/quiz" element={<QuizPage />} />
         <Route path="/create-question" element={<CreateQuestionPage />} />
         <Route path="/mode" element={<ModeSelection />} />
+        <Route path="/minecart-adventure" element={<MinecartAdventure />} />
       </Routes>
     </BrowserRouter>
   );
