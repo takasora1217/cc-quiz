@@ -116,3 +116,16 @@ html {
   aspect-ratio: 1 / 1;
   margin-right: 5vw;
 }
+/* 判定後 */
+.TFs{
+  display: flex;
+  align-items: center;
+  margin-top: -5vh;
+}
+.h4{
+  color: red;
+  font-size: 6vh;
+  margin-right: 2vw;
+  border-bottom: 3px solid red;
+  padding: 0 4vw 0 2vw;
+}
