@@ -1,0 +1,108 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.ResultPage {
+  min-height: 100vh;
+  min-width: 100vw;
+  background-image: url(/img/メカニック.png);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.header-container h2 {
+  color: black;
+  max-width: 65vw;
+  font-size: 6vh;
+  margin-top: 6vh; /* Adjusted from -6vh */
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 7vh 3vw 7vh 3vw;
+  border-radius: 2vh;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.results-centering-container {
+  position: fixed;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -30%); /* Adjust for element's own size */
+  width: 100vw; /* Keep full width */
+  display: flex;
+  justify-content: center;
+}
+
+.results-container {
+  display: flex;
+  justify-content: center;
+  gap: 4.5vw;
+}
+
+.result-item {
+  min-width: 10vw;
+  color: black;
+  font-size: 10vh;
+  text-align: center;
+  background-color: white;
+  padding: 2vh 2vw 2vh 2vw;
+}
+
+.result-item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.question-number {
+  color: white;
+  font-size: 3vh;
+  background-color: black;
+  padding: 1vh 2vw;
+  border-radius: 1vh;
+  margin-bottom: 1vh;
+}
+
+.home-button {
+  position: fixed;
+  bottom: 3vh;
+  right: 3vw;
+  color: white;
+  padding: 3vh 3vw 3vh 3vw;
+  font-size: 4vh;
+  background-color: rgb(0, 0, 236);
+  border: none;
+  border-radius: 5vh;
+  box-shadow: 0.5vh 1vh 2vh rgba(11, 16, 52, 0.699);
+  cursor: pointer; /* Indicate it's clickable */
+  z-index: 10; /* Ensure it's above other elements */
+}
+
+.result-item.true {
+  background-color: red;
+  color: white;
+}
+
+.result-item.false {
+  background-color: blue;
+  color: white;
+}
+
+.home-button:hover {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 236);
+  border: 3px solid blue;
+}
