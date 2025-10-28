@@ -7,7 +7,7 @@ export default function ResultPage() {
   const location = useLocation();
 
   // QuizPageから渡された結果データを取得、なければダミーデータを使用
-  const questionResults = location.state?.results || ["正", "誤", "正", "正", "誤"];
+  const questionResults = location.state?.results || ["正", "誤", "誤", "正", "誤"];
 
   const handleGoHome = () => {
     navigate("/"); // Navigate to the home page
