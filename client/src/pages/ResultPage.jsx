@@ -1,4 +1,5 @@
 import React from "react";
+import "../css/ResultPage.css";
 
 
 export default function ResultPage() {

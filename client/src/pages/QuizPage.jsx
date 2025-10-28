@@ -9,6 +9,7 @@ export default function QuizPage() {
   const navigate = useNavigate();
   const [showTrueFalse, setShowTrueFalse] = useState(false);
   const [questionCount, setQuestionCount] = useState(0);
+  const [results, setResults] = useState([]); // 結果を保存する配列
   const maxQuestions = 5;
 
   // InputAnswerからの回答送信→ TrueFalseを表示
@@ -18,13 +19,19 @@ export default function QuizPage() {
   };
 
   // TrueFalseからの次へボタンクリック→ 問題数更新、TrueFalseを非表示
-  const handleNextQuestion = () => {
+  const handleNextQuestion = (judgeResult) => {
+    // judgeの結果を配列に保存
+    const newResults = [...results, judgeResult];
+    setResults(newResults);
+    console.log("結果が保存されました:", newResults);
+    
     const nextCount = questionCount + 1;
     setQuestionCount(nextCount);
+
     
     if (nextCount >= maxQuestions) {
       // 最大問題数に達した場合は結果ページへ
-      navigate("/result");
+      navigate("/result", { state: { results: newResults } });
     } else {
       // 次の問題へ（QuizDisplayに戻る）
       setShowTrueFalse(false);

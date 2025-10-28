@@ -17,6 +17,12 @@ export default function TrueFalse({ onNextQuestion, questionNumber, isLastQuesti
         setJudge(newJudge);
     }, []);
 
+    // judgeの結果から正誤を判定
+    const getOverallResult = () => {
+        return judge.every(j => j === "T") ? "正" : "誤";
+    };
+
+
     // 背景色の決定
     const getAnswerColor = (judgement) => {
         return judgement === "T" ? "red" : "blue";
@@ -25,7 +31,9 @@ export default function TrueFalse({ onNextQuestion, questionNumber, isLastQuesti
     // 次の問題ボタンクリック処理
     const handleNextClick = () => {
         if (onNextQuestion) {
-            onNextQuestion();
+            const result = getOverallResult();
+            console.log(`問題${questionNumber}の結果:`, result);
+            onNextQuestion(result);
         }
     };
 
