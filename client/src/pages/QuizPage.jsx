@@ -1,16 +1,36 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../QuizPage/QuizPage.css";
 import AreYouReady from "../QuizPage/AreYouReady";
 import QuizDisplay from "../QuizPage/QuizDisplay";
 import TrueFalse from "../QuizPage/TrueFalse";
+import socket from "../socket/socket";
 
 export default function QuizPage() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [showTrueFalse, setShowTrueFalse] = useState(false);
   const [questionCount, setQuestionCount] = useState(0);
   const [results, setResults] = useState([]); // 結果を保存する配列
+  const [roomData, setRoomData] = useState(null); // ルーム情報
   const maxQuestions = 5;
+
+  // ルーム情報を取得
+  useEffect(() => {
+    // locationからルーム情報を取得（他のページから遷移してきた場合）
+    if (location.state) {
+      setRoomData(location.state);
+    }
+
+    // Socket.ioでルーム情報の更新を監視
+    socket.on("roomUpdated", (updatedRoomData) => {
+      setRoomData(updatedRoomData);
+    });
+
+    return () => {
+      socket.off("roomUpdated");
+    };
+  }, [location]);
 
   // InputAnswerからの回答送信→ TrueFalseを表示
   const handleAnswerSubmit = (answer) => {
@@ -24,11 +44,10 @@ export default function QuizPage() {
     const newResults = [...results, judgeResult];
     setResults(newResults);
     console.log("結果が保存されました:", newResults);
-    
+
     const nextCount = questionCount + 1;
     setQuestionCount(nextCount);
 
-    
     if (nextCount >= maxQuestions) {
       // 最大問題数に達した場合は結果ページへ
       navigate("/result", { state: { results: newResults } });
@@ -37,23 +56,23 @@ export default function QuizPage() {
       setShowTrueFalse(false);
     }
   };
-  
-  
+
   return (
     <div className="QuizPage">
       <AreYouReady /> {/* "Are you ready?" → "Start!" の表示 */}
-      
       {/* QuizDisplay または TrueFalse を表示 */}
       {!showTrueFalse ? (
-        <QuizDisplay 
-          onAnswerSubmit={handleAnswerSubmit} 
+        <QuizDisplay
+          onAnswerSubmit={handleAnswerSubmit}
           questionNumber={questionCount + 1}
+          roomData={roomData}
         />
       ) : (
-        <TrueFalse 
+        <TrueFalse
           onNextQuestion={handleNextQuestion}
           questionNumber={questionCount + 1}
           isLastQuestion={questionCount + 1 === maxQuestions}
+          roomData={roomData}
         />
       )}
     </div>
