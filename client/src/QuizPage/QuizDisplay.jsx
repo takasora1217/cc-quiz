@@ -3,13 +3,17 @@ import "../QuizPage/QuizPage.css";
 import InputAnswer from "./InputAnswer";
 import QuizBox from "./QuizBox";
 
-export default function QuizDisplay({ onAnswerSubmit, questionNumber }) {
-    const [display, setDisplay] = useState(false);
+export default function QuizDisplay({
+  onAnswerSubmit,
+  questionNumber,
+  roomData,
+}) {
+  const [display, setDisplay] = useState(false);
 
-                //↓仮のデータ。ＤＢから問題を取得するように変更してください！！
+  //↓仮のデータ。ＤＢから問題を取得するように変更してください！！
   const text = `【問題${questionNumber}】近代文学の短編小説『檸檬』の作者は梶井〇〇〇。空欄を答えよ。`;
-    
-    //問題文、解答欄、解答送信ボタンの表示制御
+
+  //問題文、解答欄、解答送信ボタンの表示制御
   useEffect(() => {
     setDisplay(false);
 
@@ -25,18 +29,17 @@ export default function QuizDisplay({ onAnswerSubmit, questionNumber }) {
     }
   }, [questionNumber]);
 
-    
   return (
     <>
-    <QuizBox />
-    <div className="DisplayText">
-          {display &&
-            <>
-              <h2 className="h2">{text}</h2>
-              {/*↓ 解答欄、解答送信ボタン*/}
-              <InputAnswer onAnswerSubmit={onAnswerSubmit} />
-            </>
-          }
+      <QuizBox roomData={roomData} />
+      <div className="DisplayText">
+        {display && (
+          <>
+            <h2 className="h2">{text}</h2>
+            {/*↓ 解答欄、解答送信ボタン*/}
+            <InputAnswer onAnswerSubmit={onAnswerSubmit} />
+          </>
+        )}
       </div>
     </>
   );
