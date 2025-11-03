@@ -1,20 +1,31 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import socket from "../socket/socket";
 import "./QuizPage.css";
 
-export default function InputAnswer({ onAnswerSubmit }) {
+export default function InputAnswer({ onAnswerSubmit, questionNumber }) {
   const [answer, setAnswer] = useState("");
   const [buttonLabel, setButtonLabel] = useState("回答送信");
+  const location = useLocation();
 
   const handleSubmit = () => {
     if (answer.trim()) {
       console.log("解答:", answer);
       setButtonLabel("お待ちください...");
-      
+
+      // サーバーに回答を送信
+      const keyword = location.state?.keyword;
+      socket.emit("answerSubmitted", {
+        answer: answer.trim(),
+        keyword,
+        questionNumber,
+      });
+
       // 親コンポーネントに回答を送信
       if (onAnswerSubmit) {
         onAnswerSubmit(answer);
       }
-      
+
       setAnswer("");
     }
   };

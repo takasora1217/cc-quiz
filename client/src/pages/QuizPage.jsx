@@ -27,15 +27,25 @@ export default function QuizPage() {
       setRoomData(updatedRoomData);
     });
 
+    // 全員の回答が揃ったらTrueFalseを表示
+    socket.on(
+      "allAnswersReady",
+      ({ questionNumber: qNum, answers, players }) => {
+        console.log(`問題${qNum}の全員回答完了、TrueFalse表示:`, answers);
+        setShowTrueFalse(true);
+      }
+    );
+
     return () => {
       socket.off("roomUpdated");
+      socket.off("allAnswersReady");
     };
   }, [location]);
 
-  // InputAnswerからの回答送信→ TrueFalseを表示
+  // InputAnswerからの回答送信→ 待機状態（TrueFalseはサーバーからの通知で表示）
   const handleAnswerSubmit = (answer) => {
     console.log("回答が送信されました:", answer);
-    setShowTrueFalse(true);
+    // setShowTrueFalse(true); // これはサーバーからの通知で実行される
   };
 
   // TrueFalseからの次へボタンクリック→ 問題数更新、TrueFalseを非表示
