@@ -13,6 +13,7 @@ export default function QuizPage() {
   const [questionCount, setQuestionCount] = useState(0);
   const [results, setResults] = useState([]); // 結果を保存する配列
   const [roomData, setRoomData] = useState(null); // ルーム情報
+  const [currentAnswers, setCurrentAnswers] = useState([]); // プレイヤーの回答データ
   const maxQuestions = 5;
 
   // ルーム情報を取得
@@ -27,15 +28,26 @@ export default function QuizPage() {
       setRoomData(updatedRoomData);
     });
 
+    // 全員の回答が揃ったらTrueFalseを表示
+    socket.on(
+      "allAnswersReady",
+      ({ questionNumber: qNum, answers, players }) => {
+        console.log(`問題${qNum}の全員回答完了、TrueFalse表示:`, answers);
+        setCurrentAnswers(answers); // プレイヤーの回答データを保存
+        setShowTrueFalse(true);
+      }
+    );
+
     return () => {
       socket.off("roomUpdated");
+      socket.off("allAnswersReady");
     };
-  }, [location]);
+  }, []); // locationを依存配列から削除
 
-  // InputAnswerからの回答送信→ TrueFalseを表示
+  // InputAnswerからの回答送信→ 待機状態（TrueFalseはサーバーからの通知で表示）
   const handleAnswerSubmit = (answer) => {
     console.log("回答が送信されました:", answer);
-    setShowTrueFalse(true);
+    // setShowTrueFalse(true); // これはサーバーからの通知で実行される
   };
 
   // TrueFalseからの次へボタンクリック→ 問題数更新、TrueFalseを非表示
@@ -46,14 +58,22 @@ export default function QuizPage() {
     console.log("結果が保存されました:", newResults);
 
     const nextCount = questionCount + 1;
+    console.log(
+      `現在の問題数: ${
+        questionCount + 1
+      }, 次の問題数: ${nextCount}, 最大問題数: ${maxQuestions}`
+    );
     setQuestionCount(nextCount);
 
     if (nextCount >= maxQuestions) {
       // 最大問題数に達した場合は結果ページへ
+      console.log("結果ページに遷移します");
       navigate("/result", { state: { results: newResults } });
     } else {
       // 次の問題へ（QuizDisplayに戻る）
+      console.log("次の問題に進みます");
       setShowTrueFalse(false);
+      setCurrentAnswers([]); // 回答データをリセット
     }
   };
 
@@ -73,6 +93,9 @@ export default function QuizPage() {
           questionNumber={questionCount + 1}
           isLastQuestion={questionCount + 1 === maxQuestions}
           roomData={roomData}
+          answersData={currentAnswers}
+          currentCount={questionCount}
+          maxQuestions={maxQuestions}
         />
       )}
     </div>

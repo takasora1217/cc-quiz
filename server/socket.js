@@ -44,7 +44,7 @@ module.exports = function (io) {
       }
 
       // 念のため3人までに制限
-      rooms[roomID].players = rooms[roomID].players.slice(0,3);
+      rooms[roomID].players = rooms[roomID].players.slice(0, 3);
 
       io.to(roomID).emit("updatePlayerList", rooms[roomID].players);
     });
@@ -54,12 +54,51 @@ module.exports = function (io) {
       if (!rooms[roomID]) return;
       // ルームのモードを更新
       rooms[roomID].mode = mode;
+      // 回答管理用のオブジェクトを初期化
+      rooms[roomID].answers = {};
       // ルームの全員に通知
       io.to(roomID).emit("startQuiz", {
         keyword,
         mode,
         players: rooms[roomID].players,
       });
+    });
+
+    // プレイヤーの回答を受信
+    socket.on("answerSubmitted", ({ answer, keyword, questionNumber }) => {
+      const roomID = `room-${keyword}`;
+      if (!rooms[roomID]) return;
+
+      // 回答を保存
+      if (!rooms[roomID].answers[questionNumber]) {
+        rooms[roomID].answers[questionNumber] = {};
+      }
+      rooms[roomID].answers[questionNumber][socket.id] = answer;
+
+      console.log(`問題${questionNumber}の回答: ${answer} (${socket.id})`);
+
+      // 全員の回答が揃ったかチェック
+      const currentAnswers = rooms[roomID].answers[questionNumber];
+      const totalPlayers = rooms[roomID].players.length;
+      const submittedCount = Object.keys(currentAnswers).length;
+
+      console.log(`回答数: ${submittedCount}/${totalPlayers}`);
+
+      if (submittedCount === totalPlayers) {
+        // 全員の回答が揃った場合、プレイヤー順序を保って配列にする
+        const answersArray = rooms[roomID].players.map(
+          (player) => currentAnswers[player.id] || "？"
+        );
+
+        console.log(`問題${questionNumber} 全員回答完了:`, answersArray);
+
+        // 全員にTrueFalse表示を指示
+        io.to(roomID).emit("allAnswersReady", {
+          questionNumber,
+          answers: answersArray,
+          players: rooms[roomID].players,
+        });
+      }
     });
 
     socket.on("disconnect", () => {
