@@ -49,7 +49,7 @@ export default function MatchingPage() {
       <h2>待機中...</h2>
       <div className="info-box">
         <div>あなたの名前: {myName}</div>
-        <div>　あいことば: {keyword}</div>
+        <div>あいことば: {keyword}</div>
       </div>
       <div className="player-list">
         <div>参加者リスト:</div>
@@ -66,13 +66,21 @@ export default function MatchingPage() {
       </div>
       <div className="mode-select">
         <label>モード選択：</label>
-        <select value={mode} onChange={(e) => setMode(e.target.value)}>
+        <select
+          className="MatchingPage-select"
+          value={mode}
+          onChange={(e) => setMode(e.target.value)}
+        >
           <option value="">選択してください</option>
           <option value="five-league">ファイブリーグ（3人用）</option>
           <option value="other-mode">その他モード</option>
         </select>
       </div>
-      <button onClick={handleStartQuiz} disabled={!mode}>
+      <button
+        className="MatchingPage-button"
+        onClick={handleStartQuiz}
+        disabled={!mode}
+      >
         ゲームスタート
       </button>
     </div>
