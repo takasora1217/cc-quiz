@@ -5,7 +5,7 @@ body, html {
     width: 100%;
 }
 
-.MatchingPage {
+.ModeSelectionPage {
     min-height: 100vh;
     min-width: 100vw;
     background-image: url(/img/ネプリーグ待機セット.png);
@@ -14,43 +14,20 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-weight: bold;
+    font-family: "DotGothic16", sans-serif;
 }
 
-.MatchingPage h2 {
-    font-family: "DotGothic16", sans-serif;
+.ModeSelectionPage h2 {
+    margin-top: 6vh;
     color: #ff0000;
     font-size: 11vh;
-    margin-bottom: 5vh;
+    margin-bottom: 7vh;
     background-color: black;
     width: 100vw;
     text-align: center;
+    
 }
-
-.info-box {
-    color: rgb(0, 0, 0);
-    text-align: left;
-    font-size: 3.5vh;
-    margin-bottom: 5vh;
-}
-
-.player-list {
-   background-color: rgba(255, 255, 255, 0.8) ;
-   box-shadow: 1vh 1vh 2vh rgba(0, 0, 0, 0.5);
-   padding: 4vh 6vw 2vh 6vw;
-   border-radius: 2vh;
-   font-size: 4.5vh;
-}
-
-.mode-select {
-    margin-top: 3vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 3.5vh;
-}
-
-.MatchingPage-select {
+.ModeSelection-select {
     width: 500px;
     text-align: center;
     font-size: 3.5vh;
@@ -62,21 +39,20 @@ body, html {
     border-color: blue;
     box-shadow: 10px 10px 20px rgb(36, 34, 22) ;
 }
-
-.MatchingPage-button {
+.ModeSelection-button {
     color: white;
     margin-top: 1vh;
     border-radius: 3vh;
     border-color: white;
     border-width: 0.5vh;
-    font-size: 3vh;
+    font-size: 4vh;
     font-weight: bold;
-    padding: 2vh 5vh;
+    padding: 2.5vh 7vh;
     box-shadow: 10px 10px 20px rgb(36, 34, 22) ;
     background-color: blue;
 }
 
-.MatchingPage-button:hover {
+.ModeSelection-button:hover {
     background-color: rgb(255, 255, 255);
     color: blue;
     cursor: pointer;
