@@ -81,14 +81,14 @@ html {
 .h5 {
   color: black;
   font-size: 4vh;
-  margin-top: -1vh;
+  margin-top: -2vh;
   margin-bottom: 1vh;
 }
 .h2 {
   color: black;
   max-width: 65vw;
-  font-size: 5vh;
-  margin-top: -7vh;
+  font-size: 4.5vh;
+  margin-top: -9vh;
   background-color: rgba(255, 255, 255, 0.8);
   padding: 7vh 3vw 7vh 3vw;
   border-radius: 2vh;

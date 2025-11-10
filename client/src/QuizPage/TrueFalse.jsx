@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
 import "./QuizPage.css";
 
-// 定数をコンポーネント外に定義（再レンダリングで再作成されることを防ぐ）
-const CORRECT_ANSWERS = ["基", "次", "郎"];
-const QUESTION_TEXT =
-  "近代文学の短編小説『檸檬』の作者は梶井〇〇〇。空欄を答えよ。";
-
 export default function TrueFalse({
   onNextQuestion,
   questionNumber,
@@ -14,10 +9,26 @@ export default function TrueFalse({
   answersData,
   currentCount,
   maxQuestions,
+  currentQuestion,
 }) {
   const [players, setPlayers] = useState(["太郎", "次太郎", "三"]);
   const [answers, setAnswers] = useState(["？", "？", "？"]); // プレイヤーの実際の回答
   const [judge, setJudge] = useState(["", "", ""]);
+
+  // 現在の問題データから正解と問題文を取得
+  const getCorrectAnswers = () => {
+    if (!currentQuestion || !currentQuestion.correctAnswers) {
+      return ["基", "次", "郎"]; // デフォルト値
+    }
+    return currentQuestion.correctAnswers;
+  };
+
+  const getQuestionText = () => {
+    if (!currentQuestion) {
+      return "近代文学の短編小説『檸檬』の作者は梶井〇〇〇。空欄を答えよ。";
+    }
+    return currentQuestion.question;
+  };
 
   // ルームデータからプレイヤー情報を更新
   useEffect(() => {
@@ -39,11 +50,12 @@ export default function TrueFalse({
 
   // T/F判定（answersが更新されたら再実行）
   useEffect(() => {
-    const newJudge = CORRECT_ANSWERS.map((trueAnswer, index) => {
+    const correctAnswers = getCorrectAnswers();
+    const newJudge = correctAnswers.map((trueAnswer, index) => {
       return trueAnswer === answers[index] ? "T" : "F";
     });
     setJudge(newJudge);
-  }, [answers]);
+  }, [answers, currentQuestion]);
 
   // judgeの結果から正誤を判定
   const getOverallResult = () => {
@@ -69,9 +81,9 @@ export default function TrueFalse({
 
   return (
     <>
-      <h2 className="h2">{QUESTION_TEXT}</h2>
+      <h2 className="h2">{getQuestionText()}</h2>
       <div className="TFs">
-        <h4 className="h4">答え：{CORRECT_ANSWERS.join("")}</h4>
+        <h4 className="h4">答え：{getCorrectAnswers().join("")}</h4>
         <button className="AnswerButton1" onClick={handleNextClick}>
           {isLastQuestion ? "結果を見る" : "次の問題へ"}
         </button>
