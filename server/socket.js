@@ -16,6 +16,10 @@ module.exports = function (io) {
       };
 
       io.to(roomID).emit("updatePlayerList", rooms[roomID].players);
+      // もし既にホストが問題を設定していれば、新しく入室したクライアントにも送信
+      if (rooms[roomID].questions && rooms[roomID].questions.length > 0) {
+        socket.emit("roomQuestions", rooms[roomID].questions);
+      }
     });
 
     socket.on("joinRoom", ({ nickname, keyword }) => {
@@ -56,12 +60,27 @@ module.exports = function (io) {
       rooms[roomID].mode = mode;
       // 回答管理用のオブジェクトを初期化
       rooms[roomID].answers = {};
-      // ルームの全員に通知
+      // ルームの全員に通知。あらかじめ選択された問題があれば含める
       io.to(roomID).emit("startQuiz", {
         keyword,
         mode,
         players: rooms[roomID].players,
+        questions: rooms[roomID].questions || [],
       });
+    });
+
+    // ホストが選択した問題リストを受け取り、ルームに保存して全員に配信する
+    socket.on("selectedQuestions", ({ keyword, questions }) => {
+      const roomID = `room-${keyword}`;
+      if (!rooms[roomID]) return;
+      // 受け取った問題配列を保存（質問オブジェクトの配列を想定）
+      rooms[roomID].questions = questions;
+      console.log(
+        `部屋${roomID}に問題がセットされました:`,
+        questions.map((q) => q.id || q)
+      );
+      // 全員に配信して各クライアントを同期させる
+      io.to(roomID).emit("roomQuestions", rooms[roomID].questions);
     });
 
     // プレイヤーの回答を受信
