@@ -7,16 +7,26 @@ export default function ResultPage() {
   const location = useLocation();
 
   // QuizPageから渡された結果データを取得、なければダミーデータを使用
-  const questionResults = location.state?.results || ["正", "誤", "誤", "正", "誤"];
+  const questionResults = location.state?.results || [
+    "正",
+    "誤",
+    "誤",
+    "正",
+    "誤",
+  ];
 
   const handleGoHome = () => {
     navigate("/"); // Navigate to the home page
   };
 
+  const handlePlayAgain = () => {
+    navigate("/quiz");
+  };
+
   return (
     <div className="ResultPage">
       <div className="header-container">
-        <h2>おつかれええええ</h2>
+        <h2>☆結果発表☆</h2>
       </div>
       <div className="results-centering-container">
         <div className="results-container">
@@ -32,8 +42,11 @@ export default function ResultPage() {
           ))}
         </div>
       </div>
+      <button className="play-again-button" onClick={handlePlayAgain}>
+        もう一度あそぶ
+      </button>
       <button className="home-button" onClick={handleGoHome}>
-        Home Pageに戻る
+        ホームにもどる
       </button>
     </div>
   );
