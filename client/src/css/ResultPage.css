@@ -91,17 +91,32 @@ html {
   z-index: 10; /* Ensure it's above other elements */
 }
 
+.play-again-button {
+  position: fixed;
+  bottom: 3vh;
+  left: 3vw;
+  color: white;
+  padding: 3vh 3vw 3vh 3vw;
+  font-size: 4vh;
+  background-color: rgb(0, 0, 236);
+  border: none;
+  border-radius: 5vh;
+  box-shadow: 0.5vh 1vh 2vh rgba(11, 16, 52, 0.699);
+  cursor: pointer; /* Indicate it's clickable */
+  z-index: 10; /* Ensure it's above other elements */
+}
+
 .result-item.true {
   background-color: red;
   color: white;
 }
-
 .result-item.false {
   background-color: blue;
   color: white;
 }
 
-.home-button:hover {
+.home-button:hover,
+.play-again-button:hover {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 236);
   border: 3px solid blue;
