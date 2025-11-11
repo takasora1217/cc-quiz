@@ -11,21 +11,24 @@ export default function TrueFalse({
   maxQuestions,
   currentQuestion,
 }) {
-  const [players, setPlayers] = useState(["太郎", "次太郎", "三"]);
-  const [answers, setAnswers] = useState(["？", "？", "？"]); // プレイヤーの実際の回答
+  const [players, setPlayers] = useState(["", "", ""]);
+  const [answers, setAnswers] = useState(["", "", ""]); // プレイヤーの実際の回答
   const [judge, setJudge] = useState(["", "", ""]);
 
   // 現在の問題データから正解と問題文を取得
   const getCorrectAnswers = () => {
-    if (!currentQuestion || !currentQuestion.correctAnswers) {
-      return ["基", "次", "郎"]; // デフォルト値
+    // answer は Firestore に配列 (string[]) として保存されている前提
+    if (!currentQuestion || !Array.isArray(currentQuestion.answer)) {
+      return ["", "", ""]; // デフォルト
     }
-    return currentQuestion.correctAnswers;
+    const arr = currentQuestion.answer.slice(0, 3);
+    while (arr.length < 3) arr.push("");
+    return arr;
   };
 
   const getQuestionText = () => {
     if (!currentQuestion) {
-      return "近代文学の短編小説『檸檬』の作者は梶井〇〇〇。空欄を答えよ。";
+      return "問題文が読み取れません。";
     }
     return currentQuestion.question;
   };

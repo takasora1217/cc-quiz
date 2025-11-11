@@ -4,7 +4,8 @@ html {
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .QuizPage {
@@ -16,7 +17,7 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /*Are you ready?↓*/
@@ -93,7 +94,6 @@ html {
   padding: 7vh 3vw 7vh 3vw;
   border-radius: 2vh;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-
 }
 .AnswerButton1 {
   color: white;
@@ -110,7 +110,7 @@ html {
   color: rgb(0, 0, 236);
   border: 3px solid blue;
 }
-.input{
+.input {
   text-align: center;
   font-size: 8vh;
   border: 1vh solid;
@@ -119,16 +119,15 @@ html {
   box-shadow: 0.5vh 1vh 2vh rgba(11, 16, 52, 0.699);
   padding: 1.2vw 1.2vw 1.2vw 1.2vw;
   width: 10vh;
-  aspect-ratio: 1 / 1;
   margin-right: 5vw;
 }
 /* 判定後 */
-.TFs{
+.TFs {
   display: flex;
   align-items: center;
   margin-top: -5vh;
 }
-.h4{
+.h4 {
   color: red;
   font-size: 6vh;
   margin-right: 2vw;
