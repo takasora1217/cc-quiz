@@ -57,7 +57,7 @@ function CreateQuestionPage() {
     try {
       await addDoc(collection(db, "questions"), {
         question: question.trim(),
-        answer: answer.join(""),
+        answer: answer,
         createdAt: new Date(),
       });
 
