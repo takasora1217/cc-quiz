@@ -1,16 +1,12 @@
 body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
+    background-color: yellow;
+    height: auto;
 }
 
 .MatchingPage {
-    min-height: 100vh;
-    min-width: 100vw;
     background-image: url(/img/ネプリーグ待機セット.png);
-    background-size: cover;
-    background-position: center;
+    height: auto;
+    background-size: cover; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,6 +21,7 @@ body, html {
     background-color: black;
     width: 100vw;
     text-align: center;
+    margin-top: 5vh;
 }
 
 .info-box {
@@ -51,9 +48,9 @@ body, html {
 }
 
 .MatchingPage-select {
-    width: 500px;
+    width: 40vw;
     text-align: center;
-    font-size: 3.5vh;
+    font-size: 3vh;
     font-weight: bold;
     margin-bottom: 5vh;
     padding: 3vh;
@@ -65,13 +62,13 @@ body, html {
 
 .MatchingPage-button {
     color: white;
-    margin-top: 1vh;
+    margin-bottom: 10vh;
     border-radius: 3vh;
     border-color: white;
     border-width: 0.5vh;
-    font-size: 3vh;
+    font-size: 4vh;
     font-weight: bold;
-    padding: 2vh 5vh;
+    padding: 4vh 5vh;
     box-shadow: 10px 10px 20px rgb(36, 34, 22) ;
     background-color: blue;
 }

@@ -76,13 +76,15 @@ export default function MatchingPage() {
           <option value="other-mode">その他モード</option>
         </select>
       </div>
-      <button
-        className="MatchingPage-button"
-        onClick={handleStartQuiz}
-        disabled={!mode}
-      >
-        ゲームスタート
-      </button>
+      <div className="button7">
+        <button
+          className="MatchingPage-button"
+          onClick={handleStartQuiz}
+          disabled={!mode}
+        >
+          ゲームスタート
+        </button>
+      </div>
     </div>
   );
 }

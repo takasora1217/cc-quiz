@@ -7,16 +7,17 @@ html {
 }
 
 .HomePage {
-    min-height: 100vh;
-    min-width: 100vw;
-    background-image: url(/img/メカニック.png);
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: "DotGothic16", sans-serif;
-    overflow: hidden;
+  min-height: 100vh;
+  min-width: 100vw;
+  background-image: url(/img/メカニック.png);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "DotGothic16", sans-serif;
+  /* allow content to overflow vertically so page can scroll when tall */
+  overflow: visible;
 }
 .HomePage img {
   height: 32vh;
