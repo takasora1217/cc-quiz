@@ -1,3 +1,6 @@
 import { io } from "socket.io-client";
-const socket = io("http://localhost:3001");
+// HTTPS を明示、必要なら transports を指定
+const socket = io("https://cc-quiz-ra32.onrender.com", {
+  transports: ["websocket", "polling"],
+});
 export default socket;
